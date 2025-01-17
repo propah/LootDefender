@@ -19,8 +19,14 @@ class AEnemyCharacter : public ALDCharacter
 	GENERATED_BODY()
 
 public:
+	
 	AEnemyCharacter();
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 
+
+	// Combat Interface
+	virtual int32 GetCharacterLevel() const override;
+	
 protected:
 
 	/** Called for movement input */
@@ -32,5 +38,11 @@ protected:
 	virtual void BeginPlay();
 
 	virtual void InitAbilityActorInfo() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_Level)
+	int32 Level = 1;
+
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
 };
 

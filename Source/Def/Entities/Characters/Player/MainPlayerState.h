@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/PlayerState.h"
+#include "Systems/Combat/Interfaces/CombatInterface.h"
 #include "MainPlayerState.generated.h"
 
 class UAttributeSet;
@@ -19,8 +20,12 @@ class DEF_API AMainPlayerState : public APlayerState, public IAbilitySystemInter
 
 public:
 	AMainPlayerState();
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent * GetAbilitySystemComponent() const override;
 	virtual UAttributeSet * GetAttributeSet() const;
+	
+	int32 GetCharacterLevel() const;
+	void SetCharacterLevel(int32 NewLevel);
 
 protected:
 	UPROPERTY()
@@ -28,4 +33,12 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+private:
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_Level)
+	int32 Level = 1;
+
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
 };

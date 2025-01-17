@@ -7,6 +7,7 @@
 #include "InputActionValue.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "Systems/GAS/LDAbilitySystemComponent.h"
 #include "Systems/GAS/AttributeSets/LDAttributeSet.h"
 
@@ -16,7 +17,6 @@ DEFINE_LOG_CATEGORY(LogTemplateEnemy);
 // ADefEnemy
 
 AEnemyCharacter::AEnemyCharacter()
-	: ALDCharacter()
 {		
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -36,6 +36,18 @@ AEnemyCharacter::AEnemyCharacter()
 	AttributeSet = CreateDefaultSubobject<ULDAttributeSet>("AttributeSet");
 }
 
+void AEnemyCharacter::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AEnemyCharacter, Level);
+}
+
+int32 AEnemyCharacter::GetCharacterLevel() const
+{
+	return Level;
+}
+
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -46,6 +58,10 @@ void AEnemyCharacter::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<ULDAbilitySystemComponent>(AbilitySystemComponent)->InitAbilityInfo();
+}
+
+void AEnemyCharacter::OnRep_Level(int32 OldLevel)
+{
 }
 
 //////////////////////////////////////////////////////////////////////////

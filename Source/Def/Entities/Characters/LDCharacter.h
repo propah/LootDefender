@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Systems/Combat/Interfaces/CombatInterface.h"
 
 #include "LDCharacter.generated.h"
 
@@ -17,7 +18,7 @@ class ULDAttributeSet;
 
 
 UCLASS(Abstract)
-class DEF_API ALDCharacter : public ACharacter, public IAbilitySystemInterface
+class DEF_API ALDCharacter : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
 

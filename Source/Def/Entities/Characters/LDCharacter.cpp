@@ -48,6 +48,7 @@ void ALDCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffect
 	check(DefaultSecondaryAttributes);
 	
 	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
 	FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(
 		GameplayEffect, Level, ContextHandle);
 	if (SpecHandle.IsValid())

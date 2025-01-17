@@ -42,7 +42,6 @@ void APlayerCharacter::InitAbilityActorInfo()
 }
 
 APlayerCharacter::APlayerCharacter()
-	: ALDCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -108,11 +107,18 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
-	}
+	} 
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+int32 APlayerCharacter::GetCharacterLevel() const
+{
+	const AMainPlayerState* CurrentPlayerState = GetPlayerState<AMainPlayerState>();
+	check(CurrentPlayerState);
+	return CurrentPlayerState->GetCharacterLevel();
 }
 
 void APlayerCharacter::PossessedBy(AController* NewController)
