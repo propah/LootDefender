@@ -3,12 +3,12 @@
 
 #include "OverlayWidgetController.h"
 
-#include "Systems/GAS/LDAbilitySystemComponent.h"
-#include "Systems/GAS/AttributeSets/LDAttributeSet.h"
+#include "Systems/GAS/DefAbilitySystemComponent.h"
+#include "Systems/GAS/AttributeSets/DefAttributeSet.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
 {
-	const ULDAttributeSet* LDAttributeSet = CastChecked<ULDAttributeSet>(AttributeSet);
+	const UDefAttributeSet* LDAttributeSet = CastChecked<UDefAttributeSet>(AttributeSet);
 	
 	OnHealthChanged.Broadcast(LDAttributeSet->GetHealth());
 	OnMaxHealthChanged.Broadcast(LDAttributeSet->GetMaxHealth());
@@ -16,7 +16,7 @@ void UOverlayWidgetController::BroadcastInitialValues()
 
 void UOverlayWidgetController::BindCallbacksToDependencies()
 {
-	const ULDAttributeSet* LDAttributeSet = CastChecked<ULDAttributeSet>(AttributeSet);
+	const UDefAttributeSet* LDAttributeSet = CastChecked<UDefAttributeSet>(AttributeSet);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(LDAttributeSet->GetHealthAttribute())
 		.AddUObject(this, &UOverlayWidgetController::HealthChanged);
@@ -24,7 +24,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(LDAttributeSet->GetMaxHealthAttribute())
 		.AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
 
-	ULDAbilitySystemComponent* LDAbilitySystemComponent = Cast<ULDAbilitySystemComponent>(AbilitySystemComponent);
+	UDefAbilitySystemComponent* LDAbilitySystemComponent = Cast<UDefAbilitySystemComponent>(AbilitySystemComponent);
 	
 	LDAbilitySystemComponent->EffectAssetTagsDelegate.AddLambda([](const FGameplayTagContainer& AssetTags)
 	{

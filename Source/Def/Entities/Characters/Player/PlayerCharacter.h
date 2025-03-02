@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Entities/Characters/LDCharacter.h"
+#include "Entities/Characters/DefCharacter.h"
 #include "Logging/LogMacros.h"
 
 
@@ -19,7 +19,7 @@ class UAbilitySystemComponent;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class APlayerCharacter : public ALDCharacter
+class APlayerCharacter : public ADefCharacter
 {
 	GENERATED_BODY()
 	

@@ -4,16 +4,16 @@
 #include "MainPlayerState.h"
 
 #include "Net/UnrealNetwork.h"
-#include "Systems/GAS/LDAbilitySystemComponent.h"
-#include "Systems/GAS/AttributeSets/LDAttributeSet.h"
+#include "Systems/GAS/DefAbilitySystemComponent.h"
+#include "Systems/GAS/AttributeSets/DefAttributeSet.h"
 
 AMainPlayerState::AMainPlayerState()
 {
-	AbilitySystemComponent = CreateDefaultSubobject<ULDAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UDefAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 	
-	AttributeSet = CreateDefaultSubobject<ULDAttributeSet>("AttributeSet");
+	AttributeSet = CreateDefaultSubobject<UDefAttributeSet>("AttributeSet");
 	
 	NetUpdateFrequency = 60.f;
 }

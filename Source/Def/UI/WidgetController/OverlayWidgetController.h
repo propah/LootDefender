@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "LDWidgetController.h"
+#include "DefWidgetController.h"
 #include "OverlayWidgetController.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
 
 UCLASS(BlueprintType, Blueprintable)
-class DEF_API UOverlayWidgetController : public ULDWidgetController
+class DEF_API UOverlayWidgetController : public UDefWidgetController
 {
 	GENERATED_BODY()
 public:

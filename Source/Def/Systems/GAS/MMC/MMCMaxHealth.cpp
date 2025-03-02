@@ -3,12 +3,12 @@
 
 #include "MMCMaxHealth.h"
 
-#include "Entities/Characters/LDCharacter.h"
-#include "Systems/GAS/AttributeSets/LDAttributeSet.h"
+#include "Entities/Characters/DefCharacter.h"
+#include "Systems/GAS/AttributeSets/DefAttributeSet.h"
 
 UMMCMaxHealth::UMMCMaxHealth()
 {
-	StrengthDef.AttributeToCapture = ULDAttributeSet::GetStrengthAttribute();
+	StrengthDef.AttributeToCapture = UDefAttributeSet::GetStrengthAttribute();
 	StrengthDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
 	StrengthDef.bSnapshot = false;
 
@@ -32,5 +32,5 @@ float UMMCMaxHealth::CalculateBaseMagnitude_Implementation(const FGameplayEffect
 	const ICombatInterface* SourceObject = Cast<ICombatInterface>(Spec.GetContext().GetSourceObject());
 	const int32 CharacterLevel = SourceObject->GetCharacterLevel();
 
-	return StrengthMagnitude * 2.f + CharacterLevel * 10.f;
+	return 10 + StrengthMagnitude * 2.f + CharacterLevel * 10.f;
 }

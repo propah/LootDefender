@@ -8,8 +8,8 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
-#include "Systems/GAS/LDAbilitySystemComponent.h"
-#include "Systems/GAS/AttributeSets/LDAttributeSet.h"
+#include "Systems/GAS/DefAbilitySystemComponent.h"
+#include "Systems/GAS/AttributeSets/DefAttributeSet.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateEnemy);
 
@@ -29,11 +29,11 @@ AEnemyCharacter::AEnemyCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
-	AbilitySystemComponent = CreateDefaultSubobject<ULDAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UDefAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	
-	AttributeSet = CreateDefaultSubobject<ULDAttributeSet>("AttributeSet");
+	AttributeSet = CreateDefaultSubobject<UDefAttributeSet>("AttributeSet");
 }
 
 void AEnemyCharacter::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
@@ -57,7 +57,7 @@ void AEnemyCharacter::BeginPlay()
 void AEnemyCharacter::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
-	Cast<ULDAbilitySystemComponent>(AbilitySystemComponent)->InitAbilityInfo();
+	Cast<UDefAbilitySystemComponent>(AbilitySystemComponent)->InitAbilityInfo();
 }
 
 void AEnemyCharacter::OnRep_Level(int32 OldLevel)

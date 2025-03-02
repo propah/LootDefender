@@ -13,8 +13,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "MainPlayerState.h"
-#include "Systems/GAS/LDAbilitySystemComponent.h"
-#include "UI/HUD/LDHUD.h"
+#include "Systems/GAS/DefAbilitySystemComponent.h"
+#include "UI/HUD/DefHUD.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -29,11 +29,11 @@ void APlayerCharacter::InitAbilityActorInfo()
 	AbilitySystemComponent = MainPlayerState->GetAbilitySystemComponent();
 	
 	AbilitySystemComponent->InitAbilityActorInfo(MainPlayerState, this);
-	Cast<ULDAbilitySystemComponent>(AbilitySystemComponent)->InitAbilityInfo();
+	Cast<UDefAbilitySystemComponent>(AbilitySystemComponent)->InitAbilityInfo();
 
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
-		if (ALDHUD* LDHUD = Cast<ALDHUD>(PlayerController->GetHUD()))
+		if (ADefHUD* LDHUD = Cast<ADefHUD>(PlayerController->GetHUD()))
 		{
 			LDHUD->InitOverlay(PlayerController, MainPlayerState, AbilitySystemComponent, AttributeSet);
 		}

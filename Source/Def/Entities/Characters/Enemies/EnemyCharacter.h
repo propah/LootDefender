@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Entities/Characters/LDCharacter.h"
+#include "Entities/Characters/DefCharacter.h"
 #include "Logging/LogMacros.h"
 
 #include "EnemyCharacter.generated.h"
@@ -14,7 +14,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateEnemy, Log, All);
 
 UCLASS()
-class AEnemyCharacter : public ALDCharacter
+class AEnemyCharacter : public ADefCharacter
 {
 	GENERATED_BODY()
 
